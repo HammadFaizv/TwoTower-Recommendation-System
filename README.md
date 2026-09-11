@@ -19,20 +19,6 @@ A two-tower neural recommender trained on the MovieLens 1M dataset, built with P
 - **Item tower**: items are initialized from a 30-dim content feature vector (20 TF-IDF genre features + 10 lexicon-based emotion scores derived from genre text), projected into `embed_dim`. The embedding table is fine-tuned during training (`freeze=False`), so it starts from content but adapts to interaction data — this is what lets a never-seen item still get a reasonable representation from its content features alone.
 - **Training objective**: in-batch softmax cross-entropy (sampled softmax / in-batch negatives) — each batch's other targets act as negatives for a given user.
 
-### Hyperparameters used
-
-| | |
-|---|---|
-| Embedding dim | 128 |
-| Attention heads | 4 |
-| Demographic embedding dim | 8 |
-| Max history length | 20 |
-| Batch size | 128 |
-| Optimizer | AdamW, lr=1e-3, weight_decay=0.01 |
-| LR schedule | ReduceLROnPlateau (mode=max, patience=1, factor=0.5) |
-| Epochs | 10 |
-| Trainable parameters | ~1.09M |
-
 ## Results
 
 ### Training (in-batch hit rate)
